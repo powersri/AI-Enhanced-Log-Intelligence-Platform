@@ -1,3 +1,4 @@
+# This file lists the dependencies for the backend of the AI-Enhanced Log Intelligence Platform. It includes specific versions for critical libraries to ensure compatibility and stability, as well as additional dependencies for various functionalities such as database interactions, authentication, and AI integrations.
 fastapi==0.115.12
 uvicorn[standard]==0.34.0
 pydantic>=2.12,<3
@@ -7,3 +8,36 @@ passlib[bcrypt]==1.7.4
 pymongo==4.11.3
 email-validator==2.2.0
 python-multipart==0.0.20
+
+# when Olivia adds RAG libraries, update it again.
+
+# insert dependencies for RAG and vector databases here, e.g., faiss-cpu, langchain, etc.
+
+
+# Additional dependencies for development and testing used throughout the semester, but not necessarily required for the core functionality of the backend. These can be installed in a separate development environment if desired.
+flask
+flask-cors
+fastapi
+uvicorn
+requests
+pydantic
+python-dotenv
+sqlalchemy
+oracledb
+pymongo
+passlib[argon2]
+python-jose
+python-multipart
+motor
+pydantic-settings
+google-genai
+faiss-cpu
+numpy
+langgraph
+langchain
+langchain-core
+langchain-google-genai
+langchain-community
+langchain-text-splitters
+python-dotenv
+langchain-ollama

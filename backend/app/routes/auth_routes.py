@@ -17,7 +17,14 @@ def register(payload: UserCreate):
 @router.post("/login", response_model=APIResponse)
 def login(payload: UserLogin):
     token = login_user(payload)
-    return APIResponse(success=True, message="Login successful", data=token)
+    return APIResponse(
+    success=True,
+    message="Login successful",
+    data={
+        "access_token": token["access_token"],
+        "token_type": token["token_type"],
+    }
+)
 
 
 @router.get("/me", response_model=APIResponse)
