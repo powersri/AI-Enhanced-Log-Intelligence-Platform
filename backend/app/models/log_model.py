@@ -1,1 +1,1 @@
-LOG_LEVELS = {"debug", "info", "warning", "error", "critical"}
+LOG_LEVELS = {"info", "warning", "error", "critical"}

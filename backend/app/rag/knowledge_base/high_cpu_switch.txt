@@ -1,0 +1,22 @@
+Issue: High CPU Usage on Network Device
+
+Symptoms:
+- Device becomes slow or unresponsive
+- High CPU utilization alerts
+- Logs indicate CPU spikes
+
+Possible Causes:
+- High traffic load
+- Routing loops
+- Misconfigured services or processes
+- Network attacks or abnormal traffic
+
+Recommended Actions:
+- Check running processes on the device
+- Analyze traffic patterns
+- Review recent configuration changes
+- Restart affected services if required
+- Monitor CPU usage over time
+
+Notes:
+- Prolonged high CPU can affect overall network performance

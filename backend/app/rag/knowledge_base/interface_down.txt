@@ -1,0 +1,22 @@
+Issue: Network Interface Down
+
+Symptoms:
+- Interface shows down status
+- Logs indicate link failure or interface down
+- Loss of connectivity to the device
+
+Possible Causes:
+- Cable disconnected or faulty
+- Interface administratively shut down
+- Upstream device failure
+- Hardware issue or port failure
+
+Recommended Actions:
+- Verify physical cable connection
+- Check interface configuration (no shutdown)
+- Run interface status commands
+- Review related device logs
+- Check upstream/downstream devices
+
+Notes:
+- Repeated interface flapping may indicate unstable hardware or cabling

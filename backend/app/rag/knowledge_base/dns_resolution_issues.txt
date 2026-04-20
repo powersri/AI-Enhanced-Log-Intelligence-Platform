@@ -1,0 +1,20 @@
+Issue: DNS Resolution Failure
+
+Symptoms:
+- Hostnames cannot be resolved
+- Application errors related to DNS
+- DNS timeout or lookup failure logs
+
+Possible Causes:
+- DNS server unreachable
+- Incorrect DNS configuration
+- Network connectivity issues
+
+Recommended Actions:
+- Verify DNS server availability
+- Check DNS configuration settings
+- Test DNS resolution using tools (ping, nslookup)
+- Restart DNS services if needed
+
+Notes:
+- DNS failures can impact multiple services across the network

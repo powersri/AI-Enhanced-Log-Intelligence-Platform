@@ -1,0 +1,20 @@
+Issue: Firewall Blocking Traffic
+
+Symptoms:
+- Traffic is denied or dropped
+- Logs show firewall alerts or blocked packets
+- Services are unreachable
+
+Possible Causes:
+- Firewall rules blocking traffic
+- Incorrect access control policies
+- Misconfigured security settings
+
+Recommended Actions:
+- Review firewall rules and policies
+- Check access control lists (ACLs)
+- Allow required traffic if safe
+- Test connectivity after changes
+
+Notes:
+- Always follow security policies when modifying firewall rules

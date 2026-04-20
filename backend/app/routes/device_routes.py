@@ -1,9 +1,16 @@
 from fastapi import APIRouter, Depends
+
+from app.auth.rbac import require_role
+from app.dependencies import get_current_user
 from app.schemas.common import APIResponse
 from app.schemas.device_schema import DeviceCreate, DeviceUpdate
-from app.services.device_service import create_device, list_devices, get_device, update_device, delete_device
-from app.dependencies import get_current_user
-from app.auth.rbac import require_role
+from app.services.device_service import (
+    create_device,
+    delete_device,
+    get_device,
+    list_devices,
+    update_device,
+)
 
 
 router = APIRouter(prefix="/devices", tags=["Devices"])
