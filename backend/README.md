@@ -22,7 +22,7 @@ A FastAPI + MongoDB backend for network operations, device management, log inges
 
 ---
 
-## 2. Local Setup in VS Code
+## 2. Setup Instructions in VS Code
 
 1. **Open the project in VS Code**
    - Use `File > Open Folder...` and select the backend folder.
@@ -72,6 +72,7 @@ MONGODB_URL=YOUR_MONGODB_URL_HERE
 JWT_SECRET=YOUR_JWT_SECRET_HERE
 JWT_ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=60
+GEMINI_API_KEY =
 ```
 
 - **MongoDB**: Must be running locally (default: `mongodb://localhost:27017`) or use an Atlas URI.
@@ -200,6 +201,7 @@ Recommended test flow:
 5. **Verify the AI report** (`GET /incidents/{incident_id}`)
    - Check that the `ai_report` field is present in the response.
 
+## - example of a rag workflow - explain how rag works with the KB and produce 
 ---
 
 ## 9. RBAC Summary

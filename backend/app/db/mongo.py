@@ -13,10 +13,10 @@ def get_db():
     return db
 
 
-def parse_object_id(value: str) -> ObjectId:
+def parse_object_id(value: str, field_name: str = "id") -> ObjectId:
     if not ObjectId.is_valid(value):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
-            detail="Invalid ID format",
+            detail=f"Invalid {field_name} format",
         )
     return ObjectId(value)

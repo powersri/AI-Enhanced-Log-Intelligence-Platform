@@ -7,9 +7,12 @@ import os
 import time
 from typing import Any
 
+from dotenv import load_dotenv
 from bson import ObjectId
 from bson.errors import InvalidId
 from fastapi import HTTPException
+
+load_dotenv()
 
 from app.db.mongo import get_db
 from app.models.incident_model import INCIDENT_SEVERITIES
@@ -67,8 +70,15 @@ def cosine_similarity(vec1: list[float], vec2: list[float]) -> float:
 
 
 def safe_json_loads(text: str) -> dict[str, Any]:
+    cleaned = text.strip()
+
+    if cleaned.startswith("```"):
+        cleaned = cleaned.removeprefix("```json").removeprefix("```").strip()
+        if cleaned.endswith("```"):
+            cleaned = cleaned[:-3].strip()
+
     try:
-        return json.loads(text)
+        return json.loads(cleaned)
     except json.JSONDecodeError:
         raise HTTPException(
             status_code=502,

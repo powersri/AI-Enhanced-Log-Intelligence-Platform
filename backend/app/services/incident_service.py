@@ -1,29 +1,10 @@
 from datetime import datetime, timezone
 
-from bson import ObjectId
 from fastapi import HTTPException
 
 from app.db.mongo import get_db, parse_object_id
 from app.models.incident_model import INCIDENT_SEVERITIES, INCIDENT_STATUSES
 from app.schemas.incident_schema import IncidentCreate
-
-
-def invalidate_incident_analysis_cache(incident_object_id: ObjectId):
-    db = get_db()
-    db.incidents.update_one(
-        {"_id": incident_object_id},
-        {
-            "$set": {
-                "ai_report": None
-            },
-            "$unset": {
-                "analysis_fingerprint": "",
-                "analysis_generated_at": "",
-                "analysis_source": "",
-                "retrieved_doc_titles": ""
-            }
-        }
-    )
 
 
 def _serialize_linked_logs(linked_log_ids: list[str]) -> list[dict]:
@@ -32,7 +13,7 @@ def _serialize_linked_logs(linked_log_ids: list[str]) -> list[dict]:
 
     for log_id in linked_log_ids:
         try:
-            log_object_id = parse_object_id(log_id, "log_id")
+            log_object_id = parse_object_id(log_id)
         except HTTPException:
             continue
 
@@ -80,7 +61,7 @@ def create_incident(payload: IncidentCreate, current_user: dict):
 
     linked_log_ids = []
     for log_id in payload.linked_logs or []:
-        log_object_id = parse_object_id(log_id, "log_id")
+        log_object_id = parse_object_id(log_id)
         log = db.logs.find_one({"_id": log_object_id})
         if not log:
             raise HTTPException(status_code=404, detail=f"Log not found: {log_id}")
@@ -109,7 +90,7 @@ def list_incidents():
 
 
 def get_incident(incident_id: str):
-    incident_object_id = parse_object_id(incident_id, "incident_id")
+    incident_object_id = parse_object_id(incident_id)
     incident = get_db().incidents.find_one({"_id": incident_object_id})
 
     if not incident:
@@ -121,8 +102,8 @@ def get_incident(incident_id: str):
 def link_log_to_incident(incident_id: str, log_id: str):
     db = get_db()
 
-    incident_object_id = parse_object_id(incident_id, "incident_id")
-    log_object_id = parse_object_id(log_id, "log_id")
+    incident_object_id = parse_object_id(incident_id)
+    log_object_id = parse_object_id(log_id)
 
     incident = db.incidents.find_one({"_id": incident_object_id})
     if not incident:
@@ -132,17 +113,10 @@ def link_log_to_incident(incident_id: str, log_id: str):
     if not log:
         raise HTTPException(status_code=404, detail="Log not found")
 
-    update_result = db.incidents.update_one(
-        {
-            "_id": incident_object_id,
-            "linked_logs": {"$ne": log_id}
-        },
-        {
-            "$addToSet": {"linked_logs": log_id}
-        },
+    db.incidents.update_one(
+        {"_id": incident_object_id},
+        {"$addToSet": {"linked_logs": log_id}},
     )
 
-    if update_result.modified_count > 0:
-        invalidate_incident_analysis_cache(incident_object_id)
-
-    return get_incident(incident_id)
+    updated_incident = db.incidents.find_one({"_id": incident_object_id})
+    return _serialize_incident(updated_incident)

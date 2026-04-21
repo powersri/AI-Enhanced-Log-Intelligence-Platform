@@ -1,0 +1,17 @@
+body {
+  background-color: #f8f9fa;
+}
+
+h1,
+h5,
+h6 {
+  color: #1f2937;
+}
+
+.card {
+  border-radius: 12px;
+}
+
+pre {
+  font-size: 0.9rem;
+}
