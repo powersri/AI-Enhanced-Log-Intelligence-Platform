@@ -919,7 +919,9 @@ function App() {
                       <tr key={log.id}>
                         <td>{log.id.slice(-6)}</td>
                         <td>{log.timestamp}</td>
-                        <td>{log.device_id}</td>
+                        <td>
+                            {devices.find((device) => device.id === log.device_id)?.hostname || log.device_id}
+                        </td>
                         <td>{log.log_level}</td>
                         <td>{log.message}</td>
                         <td>
