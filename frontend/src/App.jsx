@@ -972,7 +972,9 @@ function App() {
                           </Badge>
                         </td>
                         <td>
-                          {incident.created_by === user.id ? user.email : incident.created_by}
+                            {currentUser && incident.created_by === currentUser.id
+                              ? `${currentUser.email} (You)`
+                              : incident.created_by}
                         </td>
                         <td>
                           <Button
