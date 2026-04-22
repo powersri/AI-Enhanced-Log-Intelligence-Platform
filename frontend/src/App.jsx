@@ -10,7 +10,7 @@ import {
   Row,
   Table,
 } from "react-bootstrap";
-import { apiFetch, API_BASE } from "./api";
+import { apiFetch, API_BASE } from "./Api";
 
 function App() {
   const [health, setHealth] = useState("Checking backend...");
