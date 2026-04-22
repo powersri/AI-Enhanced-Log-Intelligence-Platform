@@ -971,7 +971,9 @@ function App() {
                             {incident.severity}
                           </Badge>
                         </td>
-                        <td>{incident.created_by}</td>
+                        <td>
+                          {incident.created_by === user.id ? user.email : incident.created_by}
+                        </td>
                         <td>
                           <Button
                             size="sm"
