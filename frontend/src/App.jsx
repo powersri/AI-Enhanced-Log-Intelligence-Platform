@@ -907,7 +907,7 @@ function App() {
                   <tr>
                     <th>ID</th>
                     <th>Timestamp</th>
-                    <th>Device ID</th>
+                    <th>Device</th>
                     <th>Level</th>
                     <th>Message</th>
                     <th>Actions</th>
